@@ -1,4 +1,4 @@
-name: run all_schedule.py
+name: run all_search.py
 
 on:
   push:
@@ -19,5 +19,5 @@ jobs:
       - name: install python packages
         run: pip install -r requirements.txt
 
-      - name: execute py script # run all_schedule.py
-        run: python all_schedule.py
+      - name: execute py script # run all_search.py
+        run: python all_search.py
