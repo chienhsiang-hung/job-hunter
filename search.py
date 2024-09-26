@@ -11,12 +11,12 @@ def search(searched_word='power platform', company='Realtek'):
     print(f'searched_word="{searched_word}", company="{company}"')
     with open('company-match.json', 'r') as my_json:
         company_dict = json.load(my_json)
-    company = company_dict[company]
+    company_id = company_dict[company]
 
-    url = f'https://www.104.com.tw/company/ajax/joblist/{company}'
+    url = f'https://www.104.com.tw/company/ajax/joblist/{company_id}'
     headers = {
         'Host': 'www.104.com.tw',
-        'Referer': f'https://www.104.com.tw/company/{company}'
+        'Referer': f'https://www.104.com.tw/company/{company_id}'
     }
     main_r = requests.get(url, headers=headers)
 
@@ -38,7 +38,8 @@ def search(searched_word='power platform', company='Realtek'):
                 potential_jobs.append(job)
 
     pd.DataFrame.from_records(potential_jobs).to_excel(f'Result.xlsx')
-    print(f'len={len(potential_jobs)}')
+    print(f'{company} result len={len(potential_jobs)}')
+    return potential_jobs
 
 if __name__ == '__main__':
     search(
