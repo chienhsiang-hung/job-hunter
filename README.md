@@ -12,7 +12,9 @@
     $ pip install -r requirements.txt
     ```
 ## Usage
-`python search.py <company> <searched_word>`
+```console
+$ python search.py <company> <searched_word>
+```
 
 # Packages
 ## Freeze
