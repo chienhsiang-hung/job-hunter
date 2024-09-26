@@ -2,7 +2,7 @@ name: run all_schedule.py
 
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '0 20 * * *'
   
 jobs:
   build:
@@ -11,4 +11,11 @@ jobs:
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content
 
-      - 
+      - name: setup python
+        uses: actions/setup-python@v4
+
+      - name: install python packages
+        run: pip install -r requirements.txt
+
+      - name: execute py script # run all_schedule.py
+        run: python all_schedule.py
