@@ -8,7 +8,7 @@ def search(searched_word='power platform', company='Realtek'):
     :param searched_word: the keyword str you want to search in lower case
     :param company: the target company
     """
-    print(f'searched_word={searched_word}, company={company}')
+    print(f'searched_word="{searched_word}", company="{company}"')
     with open('company-match.json', 'r') as my_json:
         company_dict = json.load(my_json)
     company = company_dict[company]
@@ -38,7 +38,7 @@ def search(searched_word='power platform', company='Realtek'):
                 potential_jobs.append(job)
 
     pd.DataFrame.from_records(potential_jobs).to_excel(f'Result.xlsx')
-    print(len(potential_jobs), potential_jobs)
+    print(f'len={len(potential_jobs)}')
 
 if __name__ == '__main__':
     search(
