@@ -1,9 +1,11 @@
 import requests
 import pandas as pd
+import json
 
-
+with open('company-match.json', 'r') as my_json:
+    company_dict = json.load(my_json)
 searched_word = 'power'
-company = 'aexwm9k'
+company = company_dict['Realtek']
 
 url = f'https://www.104.com.tw/company/ajax/joblist/{company}'
 headers = {
@@ -29,5 +31,5 @@ for p in range(1, int(pages)+1):
         if searched_word in job['jobDescription'].lower():
             potential_jobs.append(job)
 
-pd.DataFrame.from_records(potential_jobs).to_csv(f'Result.csv')
+pd.DataFrame.from_records(potential_jobs).to_excel(f'Result.xlsx')
 print(len(potential_jobs), potential_jobs)
