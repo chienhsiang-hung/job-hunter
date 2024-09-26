@@ -3,7 +3,7 @@ import pandas as pd
 
 
 searched_word = 'power'
-company = '1a2x6bm42t'
+company = 'aexwm9k'
 
 url = f'https://www.104.com.tw/company/ajax/joblist/{company}'
 headers = {
@@ -29,5 +29,5 @@ for p in range(1, int(pages)+1):
         if searched_word in job['jobDescription'].lower():
             potential_jobs.append(job)
 
-pd.DataFrame.from_records(potential_jobs).to_csv(f'{company}.csv')
+pd.DataFrame.from_records(potential_jobs).to_csv(f'Result.csv')
 print(len(potential_jobs), potential_jobs)
