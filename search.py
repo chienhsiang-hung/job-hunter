@@ -1,4 +1,5 @@
 import requests
+import pandas as pd
 
 
 searched_word = 'power'
@@ -28,4 +29,5 @@ for p in range(1, int(pages)+1):
         if searched_word in job['jobDescription'].lower():
             potential_jobs.append(job)
 
+pd.DataFrame.from_records(potential_jobs).to_csv(f'{company}.csv')
 print(len(potential_jobs), potential_jobs)
