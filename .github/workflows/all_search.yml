@@ -21,3 +21,10 @@ jobs:
 
       - name: execute py script # run all_search.py
         run: python all_search.py
+      
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'The project has been deployed.'
