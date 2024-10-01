@@ -3,7 +3,7 @@
 1. 
     ```console
     $ git clone https://github.com/chienhsiang-hung/job-hunter.git
-    $ cd .\job-hunter
+    $ cd ./job-hunter
     ```
 2. (Optional)
     ```console
