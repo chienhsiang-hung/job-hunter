@@ -12,15 +12,19 @@ jobs:
     steps:
       - name: checkout repo content
         uses: actions/checkout@v4 # checkout the repository content
-
+        
       - name: setup python
         uses: actions/setup-python@v3
-
       - name: install python packages
         run: pip install -r requirements.txt
 
       - name: execute py script # run all_search.py
         run: python all_search.py
+      - name: Upload search result # check out https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/storing-and-sharing-data-from-a-workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: search_result
+          path: Result.xlsx
       
       - name: Discord notification
         env:
