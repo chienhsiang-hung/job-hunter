@@ -1,4 +1,4 @@
-import json
+import os, json
 import pandas as pd
 from search import Search
 
@@ -13,7 +13,9 @@ for i, company in enumerate(company_dict):
     result = search.search(searched_word='power automate', company=company)
     potential_jobs += result
 
-with open('tmp/meta.txt', 'w') as f:
+# Ensure the directory exists
+os.makedirs('tmp', exist_ok=True)
+with open('tmp/meta.txt', 'w', encoding='utf-8') as f:
     f.write(f'Searched {i+1} companies and found {len(potential_jobs)} jobs, see: ')
 df = pd.DataFrame.from_records(potential_jobs)
 df.to_excel(f'tmp/Result.xlsx')
