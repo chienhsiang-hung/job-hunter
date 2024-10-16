@@ -14,9 +14,7 @@ for i, company in enumerate(company_dict):
     potential_jobs += result
 
 with open('tmp/meta.txt', 'w') as f:
-    f.write(
-        f'''Searched {i+1} companies and found {len(potential_jobs)} jobs, see: '''
-    )
+    f.write(f'Searched {i+1} companies and found {len(potential_jobs)} jobs, see: ')
 df = pd.DataFrame.from_records(potential_jobs)
 df.to_excel(f'tmp/Result.xlsx')
 with open('tmp/Result.json', 'w') as f:
