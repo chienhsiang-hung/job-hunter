@@ -76,7 +76,7 @@ class Search:
                 potential_jobs += self.__inner_job_search__(sub_r_json['topJobs'], searched_word, company)
             potential_jobs += self.__inner_job_search__(sub_r_json['normalJobs'], searched_word, company)
 
-        pd.DataFrame.from_records(potential_jobs).to_excel(f'Result.xlsx')
+        # pd.DataFrame.from_records(potential_jobs).to_excel(f'tmp/Result.xlsx')
         print(f'{company} result len={len(potential_jobs)}')
         if len(potential_jobs) > 0: print(potential_jobs)
         return potential_jobs

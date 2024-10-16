@@ -25,18 +25,25 @@ jobs:
         with:
           name: search result
           path: |
-            Result.xlsx
-            Result.json
+            tmp/Result.xlsx
+            tmp/Result.json
+            tmp/meta.txt
       
       - name: Read Result.json
         id: resultJson
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./Result.json
+          path: ./tmp/Result.json
+
+      - name: Read meta.txt
+        id: readMeta
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./tmp/meta.txt
 
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: ${{ steps.resultJson.outputs.content }}
+          args: ${{ steps.readMeta.outputs.content }} ${{ steps.resultJson.outputs.content }}
