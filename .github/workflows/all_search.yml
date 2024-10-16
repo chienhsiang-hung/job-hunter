@@ -28,9 +28,15 @@ jobs:
             Result.xlsx
             Result.json
       
+      - name: Read Result.json content
+        id: read_json
+        run: |
+          content = $(cat Result.json)
+          echo "::set-output name=json_content::$content"
+
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: Result.json
+          args: ${{ steps.read_json.outputs.json_content }}
