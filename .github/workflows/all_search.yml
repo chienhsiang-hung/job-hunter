@@ -31,13 +31,13 @@ jobs:
       - name: Read Result.json content
         id: read_json
         run: |
-          content = $(cat Result.json)
+          content=$(cat Result.json)
           echo "json_content=$content" >> $GITHUB_ENV
 
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          JSON_CONTENT: ${{env.json_content}}
+          JSON_CONTENT: ${{ env.json_content }}
         uses: Ilshidur/action-discord@master
         with:
           args: ${JSON_CONTENT}
