@@ -32,6 +32,18 @@ class Search:
         main_r = requests.get(url, headers=self.header)
         return main_r.json()['data']['jobCount'] != 0
 
+    def __inner_job_search__(self, _list, _word, cpn):
+        '''
+        inner loop for jobs
+        '''
+        potential_jobs = []
+        for job in _list:
+            if _word in job['jobDescription'].lower():
+                job['company'] = cpn
+                job['jobUrl'] = f'https:{job['jobUrl']}' # prettify the jobUrl
+                potential_jobs.append(job)
+        return potential_jobs
+
     def search(self, searched_word='power platform', company='Realtek'):
         """
         :param searched_word: the keyword str you want to search in lower case
@@ -59,17 +71,10 @@ class Search:
             sub_r = requests.get(url+f'?page={p}', headers=self.header)
             sub_r_json = sub_r.json()['data']['list']
 
-            # inner loop for jobs
             # check `topJobs` and `normalJobs`
             if 'topJobs' in sub_r_json:
-                for job in sub_r_json['topJobs']:
-                    if searched_word in job['jobDescription'].lower():
-                        job['company'] = company
-                        potential_jobs.append(job)
-            for job in sub_r_json['normalJobs']:
-                if searched_word in job['jobDescription'].lower():
-                    job['company'] = company
-                    potential_jobs.append(job)
+                potential_jobs += self.__inner_job_search__(sub_r_json['topJobs'], searched_word, company)
+            potential_jobs += self.__inner_job_search__(sub_r_json['normalJobs'], searched_word, company)
 
         pd.DataFrame.from_records(potential_jobs).to_excel(f'Result.xlsx')
         print(f'{company} result len={len(potential_jobs)}')
