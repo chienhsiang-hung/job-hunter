@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 
 
-def check_joblists(company_id, headers=CFG.headers):
+def check_joblists(company_id):
     url = f'https://www.104.com.tw/company/ajax/joblist/options/{company_id}'
     headers = {
         'Host': 'www.104.com.tw',
