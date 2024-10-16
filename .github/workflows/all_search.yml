@@ -32,11 +32,12 @@ jobs:
         id: read_json
         run: |
           content = $(cat Result.json)
-          echo "::set-output name=json_content::$content"
+          echo "json_content=$content" >> $GITHUB_ENV
 
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          JSON_CONTENT: ${{env.json_content}}
         uses: Ilshidur/action-discord@master
         with:
-          args: ${{ steps.read_json.outputs.json_content }}
+          args: ${JSON_CONTENT}
