@@ -11,6 +11,8 @@ for company in company_dict:
     result = search.search(searched_word='power automate', company=company)
     if len(result) > 0: potential_jobs += result
 
-pd.DataFrame.from_records(potential_jobs).to_excel(f'Result.xlsx')
+df = pd.DataFrame.from_records(potential_jobs)
+df.to_excel(f'Result.xlsx')
+
 print(f'Total len={len(potential_jobs)}')
-print(potential_jobs)
+print(df)

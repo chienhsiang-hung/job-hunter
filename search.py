@@ -60,16 +60,20 @@ class Search:
             sub_r_json = sub_r.json()['data']['list']
 
             # inner loop for jobs
+            # check `topJobs` and `normalJobs`
             if 'topJobs' in sub_r_json:
                 for job in sub_r_json['topJobs']:
                     if searched_word in job['jobDescription'].lower():
+                        job['company'] = company
                         potential_jobs.append(job)
             for job in sub_r_json['normalJobs']:
                 if searched_word in job['jobDescription'].lower():
+                    job['company'] = company
                     potential_jobs.append(job)
 
         pd.DataFrame.from_records(potential_jobs).to_excel(f'Result.xlsx')
         print(f'{company} result len={len(potential_jobs)}')
+        if len(potential_jobs) > 0: print(potential_jobs)
         return potential_jobs
 
 
