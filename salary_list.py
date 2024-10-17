@@ -17,4 +17,6 @@ header = {
 }
 url = 'https://www.104.com.tw/company/ajax/salary/list'
 main_r = requests.get(url, headers=header).json()['data']
-pd.DataFrame.from_records(main_r).sort_values('medianNonSupervisor', ascending=False).to_csv('salary_list.csv')
+df = pd.DataFrame.from_records(main_r).sort_values('medianNonSupervisor', ascending=False)
+df.to_csv('salary_list.csv')
+df.to_json('salary_list.json')
