@@ -44,14 +44,14 @@ class Search:
                 potential_jobs.append(job)
         return potential_jobs
 
-    def search(self, searched_word='power platform', company='Realtek'):
+    def search(self, searched_word='power platform', company='Realtek', company_id=None):
         """
         :param searched_word: the keyword str you want to search in lower case
         :param company: the target company
         """
         print(f'searched_word="{searched_word}", company="{company}"')
 
-        company_id = self.company_dict[company]
+        if not company_id: company_id = self.company_dict[company]
 
         self.setReferer(company_id)
 
