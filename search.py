@@ -38,7 +38,7 @@ class Search:
         '''
         potential_jobs = []
         for job in _list:
-            if _word in job['jobDescription'].lower():
+            if _word.replace(" ", "") in job['jobDescription'].lower().replace(" ", ""):
                 job['company'] = cpn
                 job['jobUrl'] = f'https:{job['jobUrl']}' # prettify the jobUrl
                 potential_jobs.append(job)
