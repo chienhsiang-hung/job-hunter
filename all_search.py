@@ -12,6 +12,8 @@ for i, company in enumerate(company_dict):
     # if i==2: break
     result = search.search(searched_word='power automate', company=company)
     potential_jobs += result
+    result = search.search(searched_word='power apps', company=company)
+    potential_jobs += result
 
 # Ensure the directory exists
 os.makedirs('tmp', exist_ok=True)
